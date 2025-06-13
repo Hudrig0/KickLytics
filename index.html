@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KickLytics | Real-Time Stream Analytics</title>
+    <meta name="description" content="KickLytics - Professional analytics and insights for Kick.com streamers. Track viewers, engagement, and earnings in real-time.">
+    <link rel="icon" type="image/svg+xml" href="https://static.vecteezy.com/system/resources/previews/043/362/263/non_2x/kick-logo-icon-streaming-service-free-vector.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo-container">
+                <img src="https://static.vecteezy.com/system/resources/previews/043/362/263/non_2x/kick-logo-icon-streaming-service-free-vector.jpg" alt="KickLytics Logo" class="logo">
+                <span class="logo-text">KickLytics</span>
+            </div>
+            <div class="search-container">
+                <input type="text" id="channelInput" placeholder="Enter channel name...">
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class="streamer-info hidden">
+                <div class="profile-card">
+                    <img id="streamerAvatar" src="assets/default-avatar.png" alt="Streamer Avatar">
+                    <div class="streamer-details">
+                        <h2 id="streamerName">Streamer Name</h2>
+                        <p id="streamTitle">Stream Title</p>
+                        <div class="stream-meta">
+                            <span id="streamCategory" class="category-tag">
+                                <i class="fas fa-gamepad"></i>
+                                Category
+                            </span>
+                            <span class="live-indicator">LIVE</span>
+                            <a id="watchStream" href="#" target="_blank" class="watch-stream-btn">
+                                <i class="fas fa-play-circle"></i>
+                                Watch Stream
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="share-actions">
+                    <button class="action-button" id="screenshotBtn" title="Take Screenshot">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <button class="action-button" id="twitterShare" title="Share on Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button class="action-button" id="copyLink" title="Copy Link">
+                        <i class="fas fa-link"></i>
+                    </button>
+                    <div class="copy-tooltip">Link copied!</div>
+                </div>
+            </div>
+
+            <div class="stats-container hidden">
+                <div class="stats-grid">
+                    <div class="stat-card" data-aos="fade-up">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>LIVE VIEWERS</h3>
+                            <p class="stat-value" id="liveViewers">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>FOLLOWERS</h3>
+                            <p class="stat-value" id="followers">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>AVERAGE VIEWERS</h3>
+                            <p class="stat-value" id="avgViewers">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>ACTIVE CHATTERS</h3>
+                            <p class="stat-value" id="activeChatters">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="stat-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>ENGAGEMENT RATE</h3>
+                            <p class="stat-value" id="engagementRate">0%</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="stat-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>LIKELY BOTTING %</h3>
+                            <p class="stat-value" id="botPercentage">0%</p>
+                        </div>
+                    </div>
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>KPP HOURLY RATE</h3>
+                            <p class="stat-value" id="kppHourlyRate">$0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>Data provided by Kick API • Updated in real-time</p>
+            <p>Made by Hudrigo</p>
+            <div class="loading-indicator hidden">
+                <div class="spinner"></div>
+                <span>Updating stats...</span>
+            </div>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 
